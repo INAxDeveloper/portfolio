@@ -44,6 +44,7 @@ function base64ToUtf8(str) {
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
+  checkAuthOnLoad();
   initStorage();
   initTabs();
   initPresets();
@@ -1137,3 +1138,154 @@ function escapeHtml(str) {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
 }
+
+// ================================================================
+// MASTER PIN AUTHENTICATION & PRIVACY LOCK
+// ================================================================
+
+// Default Master PIN hash for '7890'
+const DEFAULT_PIN_HASH = '6a95bbab63d587b596398c4bd7e91a132f24032d2007d107e5ea71967724b092';
+
+async function hashPin(pin) {
+  const msgBuffer = new TextEncoder().encode(pin);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function checkAuthOnLoad() {
+  const isSessionAuth = sessionStorage.getItem('paresh_admin_auth') === 'true';
+  const isRemembered = localStorage.getItem('paresh_admin_remembered_auth') === 'true';
+
+  if (isSessionAuth || isRemembered) {
+    unlockStudioUI();
+  } else {
+    lockStudioUI();
+  }
+}
+
+async function verifyPin() {
+  const input = document.getElementById('authPinInput');
+  const remember = document.getElementById('authRememberMe').checked;
+  const val = input.value.trim();
+
+  if (!val) {
+    showAuthError('Please enter your Master PIN.');
+    return;
+  }
+
+  const enteredHash = await hashPin(val);
+  const storedHash = localStorage.getItem('paresh_admin_pin_hash') || DEFAULT_PIN_HASH;
+
+  if (enteredHash === storedHash) {
+    sessionStorage.setItem('paresh_admin_auth', 'true');
+    if (remember) {
+      localStorage.setItem('paresh_admin_remembered_auth', 'true');
+    }
+    const errorEl = document.getElementById('authErrorMsg');
+    if (errorEl) errorEl.style.display = 'none';
+    unlockStudioUI();
+    showToast('Admin Studio unlocked! 🚀', 'success');
+  } else {
+    showAuthError('❌ Incorrect PIN. Access denied.');
+    const card = document.getElementById('authCard');
+    if (card) {
+      card.classList.remove('shake-animation');
+      void card.offsetWidth; // trigger reflow
+      card.classList.add('shake-animation');
+    }
+    input.select();
+  }
+}
+
+function showAuthError(msg) {
+  const errorEl = document.getElementById('authErrorMsg');
+  if (errorEl) {
+    errorEl.textContent = msg;
+    errorEl.style.display = 'block';
+  }
+}
+
+function unlockStudioUI() {
+  const gate = document.getElementById('authGateOverlay');
+  const root = document.getElementById('adminAppRoot');
+  if (gate) gate.classList.add('hidden');
+  if (root) root.style.display = 'flex';
+}
+
+function lockStudioUI() {
+  const gate = document.getElementById('authGateOverlay');
+  const root = document.getElementById('adminAppRoot');
+  if (gate) gate.classList.remove('hidden');
+  if (root) root.style.display = 'none';
+  const input = document.getElementById('authPinInput');
+  if (input) {
+    input.value = '';
+    setTimeout(() => input.focus(), 250);
+  }
+}
+
+function lockStudio() {
+  sessionStorage.removeItem('paresh_admin_auth');
+  localStorage.removeItem('paresh_admin_remembered_auth');
+  lockStudioUI();
+  showToast('Admin Studio locked 🔒', 'info');
+}
+
+function toggleAuthVisibility() {
+  const input = document.getElementById('authPinInput');
+  const btn = document.getElementById('authPinToggleBtn');
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+
+function openChangePinModal() {
+  document.getElementById('changePinModal').classList.add('active');
+  document.getElementById('oldPinInput').value = '';
+  document.getElementById('newPinInput').value = '';
+  document.getElementById('confirmPinInput').value = '';
+  document.getElementById('pinErrorMsg').style.display = 'none';
+}
+
+function closeChangePinModal() {
+  document.getElementById('changePinModal').classList.remove('active');
+}
+
+async function saveNewPin() {
+  const oldPin = document.getElementById('oldPinInput').value.trim();
+  const newPin = document.getElementById('newPinInput').value.trim();
+  const confirmPin = document.getElementById('confirmPinInput').value.trim();
+  const errorEl = document.getElementById('pinErrorMsg');
+
+  const oldHash = await hashPin(oldPin);
+  const currentHash = localStorage.getItem('paresh_admin_pin_hash') || DEFAULT_PIN_HASH;
+
+  if (oldHash !== currentHash) {
+    errorEl.textContent = '❌ Current PIN is incorrect.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  if (newPin.length < 4) {
+    errorEl.textContent = '❌ New PIN must be at least 4 characters.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  if (newPin !== confirmPin) {
+    errorEl.textContent = '❌ New PIN and Confirmation do not match.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  const newHash = await hashPin(newPin);
+  localStorage.setItem('paresh_admin_pin_hash', newHash);
+  closeChangePinModal();
+  showToast('Master PIN updated successfully! 🔑', 'success');
+}
+

@@ -554,3 +554,33 @@ function getDefaultProfile() {
 // INIT
 // ================================================================
 loadProfile();
+
+// ================================================================
+// SECRET ADMIN ACCESS (Private Gate)
+// Press: Ctrl + Shift + A (or triple-click footer logo)
+// ================================================================
+window.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    e.preventDefault();
+    window.location.href = 'admin.html';
+  }
+});
+
+(function initSecretLogoClick() {
+  let clicks = 0;
+  let timer = null;
+  const logo = document.querySelector('.footer-logo');
+  if (logo) {
+    logo.style.cursor = 'pointer';
+    logo.title = 'Paresh Chauhan';
+    logo.addEventListener('click', () => {
+      clicks++;
+      clearTimeout(timer);
+      if (clicks >= 3) {
+        window.location.href = 'admin.html';
+      }
+      timer = setTimeout(() => { clicks = 0; }, 1200);
+    });
+  }
+})();
+
