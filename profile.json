@@ -6,7 +6,7 @@
   "address": "India",
   "email": "pareshchauhan39500@gmail.com",
   "phone": "+91-XXXXXXXXXX",
-  "stats": { "projects": 15, "years": 3, "apps": 10 },
+  "stats": { "projects": 18, "years": 3, "apps": 12 },
   "skills": [
     {
       "category": "Android Development",
@@ -75,37 +75,73 @@
   ],
   "projects": [
     {
-      "icon": "📱",
+      "icon": "💰",
       "name": "Smart Expense Tracker",
-      "description": "A feature-rich Android app to track daily expenses with category-wise charts, budget alerts, and cloud sync via Firebase. Built with Kotlin and MVVM pattern.",
-      "tech": ["Kotlin", "Firebase", "MVVM", "Room DB"],
+      "description": "A feature-rich personal finance Android app with category-wise interactive charts, budget breach alerts, recurring transactions, and real-time cloud sync.",
+      "tech": ["Kotlin", "Firebase", "MVVM", "Room DB", "MPAndroidChart"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "https://play.google.com/store",
+      "featured": true
+    },
+    {
+      "icon": "🍔",
+      "name": "QuickBite - Food Delivery App",
+      "description": "On-demand food ordering mobile app featuring live Google Maps courier delivery tracking, interactive restaurant menus, cart state management, and coupon system.",
+      "tech": ["Kotlin", "Google Maps SDK", "Retrofit", "Coroutines", "Firebase"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "https://play.google.com/store",
+      "featured": true
+    },
+    {
+      "icon": "🏃",
+      "name": "FitPulse - Fitness & Step Tracker",
+      "description": "Activity tracking health app with step counter sensor integration, custom HIIT workout routines, weekly calorie metrics, and automatic daily goal notifications.",
+      "tech": ["Kotlin", "SensorManager", "Room DB", "WorkManager", "MVVM"],
       "github": "https://github.com/INAxDeveloper",
       "live": "",
       "featured": true
     },
     {
+      "icon": "📈",
+      "name": "CryptoWatch - Market Tracker",
+      "description": "Live cryptocurrency portfolio tracker consuming CoinGecko REST APIs with interactive candlestick price charts, watchlist bookmarks, and price threshold push alerts.",
+      "tech": ["Kotlin", "Retrofit", "Flow", "MPAndroidChart", "Coroutines"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "",
+      "featured": false
+    },
+    {
       "icon": "💬",
-      "name": "Real-Time Chat App",
-      "description": "Real-time messaging app with user authentication, push notifications, image sharing, and online status indicators powered by Firebase.",
-      "tech": ["Java", "Firebase", "XML", "Glide"],
+      "name": "Real-Time Chat & Media App",
+      "description": "Instant messaging application with user authentication, push notifications via FCM, media/image sharing, typing status indicators, and online presence tracking.",
+      "tech": ["Java", "Firebase Realtime DB", "XML", "Glide", "FCM"],
       "github": "https://github.com/INAxDeveloper",
       "live": "",
       "featured": false
     },
     {
       "icon": "🛒",
-      "name": "E-Commerce Android App",
-      "description": "Full-featured shopping app with product listings, cart management, order tracking, and Razorpay payment gateway integration.",
-      "tech": ["Kotlin", "Retrofit", "MVVM", "Razorpay"],
+      "name": "Modern E-Commerce Store",
+      "description": "Full-featured shopping app with categorized product catalogs, search filtering, wishlists, order history tracking, and secure Razorpay payment gateway integration.",
+      "tech": ["Kotlin", "Retrofit", "MVVM", "Razorpay SDK", "Room DB"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "",
+      "featured": false
+    },
+    {
+      "icon": "🎵",
+      "name": "SonicBeats - Music Player",
+      "description": "Sleek offline audio player with custom audio equalizer, playlist curation, lockscreen playback controls, and background playback via Media3 ExoPlayer.",
+      "tech": ["Kotlin", "Media3 ExoPlayer", "Foreground Service", "Coroutines"],
       "github": "https://github.com/INAxDeveloper",
       "live": "",
       "featured": false
     },
     {
       "icon": "📰",
-      "name": "News Reader App",
-      "description": "Modern news reader app consuming REST API with category filtering, bookmarks, offline reading via Room DB, and Material Design UI.",
-      "tech": ["Kotlin", "Retrofit", "Room DB", "Coroutines"],
+      "name": "NewsPulse - Daily Reader",
+      "description": "Clean news reader consuming global REST news APIs with category filtering, offline bookmarking via Room DB, and dark mode Material Design layouts.",
+      "tech": ["Kotlin", "Retrofit", "Room DB", "Coroutines", "XML"],
       "github": "https://github.com/INAxDeveloper",
       "live": "",
       "featured": false
@@ -117,8 +153,10 @@
     { "platform": "Email", "handle": "pareshchauhan39500@gmail.com", "url": "mailto:pareshchauhan39500@gmail.com", "icon": "email" }
   ],
   "appLinks": [
-    { "name": "Expense Tracker", "store": "Play Store", "url": "https://play.google.com/store" },
-    { "name": "Chat App", "store": "Play Store", "url": "https://play.google.com/store" }
+    { "name": "Smart Expense Tracker", "store": "Play Store", "url": "https://play.google.com/store" },
+    { "name": "QuickBite Delivery", "store": "Play Store", "url": "https://play.google.com/store" },
+    { "name": "FitPulse Health Tracker", "store": "Play Store", "url": "https://play.google.com/store" },
+    { "name": "Real-Time Chat App", "store": "Play Store", "url": "https://play.google.com/store" }
   ],
   "githubUsername": "INAxDeveloper",
   "footerText": "Built with love by Paresh Chauhan · Hosted on GitHub Pages"
