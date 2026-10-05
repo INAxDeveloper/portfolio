@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Paresh Chauhan - Android Developer. Building mobile apps with Kotlin &amp; Java." />
+  <meta name="keywords" content="Paresh Chauhan, Android Developer, Kotlin, Java, Firebase, Mobile Apps" />
+  <meta name="author" content="Paresh Chauhan" />
+  <title>Paresh Chauhan | Android Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== PARTICLE CANVAS ===== -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-logo">&lt;PC/&gt;</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <span class="loader-text">Loading portfolio...</span>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-logo"><span class="logo-bracket">&lt;</span>PC<span class="logo-bracket">/&gt;</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" id="nav-about">About</a></li>
+    <li><a href="#skills" id="nav-skills">Skills</a></li>
+    <li><a href="#projects" id="nav-projects">Projects</a></li>
+    <li><a href="#experience" id="nav-experience">Experience</a></li>
+    <li><a href="#contact" id="nav-contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="Paresh_AndroidDeveoper.pdf" download class="btn btn-secondary btn-sm" id="downloadCv">Download CV</a>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" id="hireMeBtn">Hire Me</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge" id="heroBadge"><span class="badge-dot"></span> Available for work</div>
+    <h1 class="hero-name" id="heroName">Paresh <span class="highlight">Chauhan</span></h1>
+    <div class="hero-title-wrapper">
+      <span class="hero-title-static">I build&nbsp;</span>
+      <span class="typewriter" id="typewriter"></span>
+    </div>
+    <p class="hero-bio" id="heroBio">Passionate Android developer crafting smooth mobile experiences with <strong>Kotlin</strong> and <strong>Java</strong> — building real-world apps with <strong>Firebase</strong>, <strong>Retrofit</strong>, and <strong>MVVM</strong> architecture.</p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary" id="viewProjectsBtn">View Projects</a>
+      <a href="https://github.com/INAxDeveloper" target="_blank" rel="noopener" class="btn btn-secondary" id="githubHeroBtn">GitHub</a>
+    </div>
+    <div class="hero-stats" id="heroStats">
+      <div class="stat-item"><span class="stat-number" data-target="15">0</span>+<span class="stat-label">Projects</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-number" data-target="3">0</span>+<span class="stat-label">Years Coding</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-number" data-target="10">0</span>+<span class="stat-label">Apps Built</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="avatar-ring">
+      <div class="avatar-glow"></div>
+      <img src="avatar.jpg" alt="Paresh Chauhan" class="avatar-img" id="avatarImg" />
+      <div class="orbit orbit-1"><div class="orbit-icon">K</div></div>
+      <div class="orbit orbit-2"><div class="orbit-icon">🤖</div></div>
+      <div class="orbit orbit-3"><div class="orbit-icon">⚡</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// about_me</span>
+      <h2>Who Am I?</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p id="aboutBio">Hey there! I am <strong>Paresh Chauhan</strong>, a passionate Android developer based in India. I specialize in building beautiful, high-performance Android applications using <strong>Kotlin</strong> and <strong>Java</strong> with XML layouts and MVVM architecture.</p>
+        <p>I believe great software is the intersection of clean architecture, elegant UI, and intelligent logic. Whether it is a snappy mobile app or a scalable API, I bring both precision and creativity to every project.</p>
+        <p>When I am not coding, I am exploring the latest in mobile tech, contributing to open source, or levelling up my skills.</p>
+        <div class="about-highlights">
+          <div class="highlight-chip">Android Dev</div>
+          <div class="highlight-chip">Kotlin Expert</div>
+          <div class="highlight-chip">Firebase Pro</div>
+          <div class="highlight-chip">Full Stack</div>
+        </div>
+      </div>
+      <div class="about-code">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="code-filename">paresh.json</span>
+          </div>
+          <pre><code>{
+  <span class="key">"name"</span>: <span class="str">"Paresh Chauhan"</span>,
+  <span class="key">"role"</span>: <span class="str">"Android Developer"</span>,
+  <span class="key">"location"</span>: <span class="str">"India"</span>,
+  <span class="key">"languages"</span>: [
+    <span class="str">"Kotlin"</span>, <span class="str">"Java"</span>,
+    <span class="str">"JavaScript"</span>
+  ],
+  <span class="key">"passions"</span>: [
+    <span class="str">"Mobile Apps"</span>,
+    <span class="str">"Clean Code"</span>,
+    <span class="str">"Open Source"</span>
+  ],
+  <span class="key">"openToWork"</span>: <span class="bool">true</span>
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// tech_stack</span>
+      <h2>Skills &amp; Technologies</h2>
+    </div>
+    <div class="skills-categories" id="skillsGrid">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="tech-pills" id="techPills">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// my_work</span>
+      <h2>Featured Projects</h2>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="center-btn">
+      <a href="https://github.com/INAxDeveloper" target="_blank" rel="noopener" class="btn btn-secondary" id="allProjectsBtn">View All on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE & EDUCATION ===== -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// my_journey</span>
+      <h2>Experience &amp; Education</h2>
+    </div>
+    <div class="exp-edu-grid">
+      <div class="timeline-column">
+        <h3 class="column-title"><span class="col-icon">💼</span> Work Experience</h3>
+        <div class="timeline" id="experienceTimeline">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+      <div class="timeline-column">
+        <h3 class="column-title"><span class="col-icon">🎓</span> Education</h3>
+        <div class="timeline" id="educationTimeline">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GITHUB STATS ===== -->
+<section id="github-stats">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// github_activity</span>
+      <h2>GitHub Stats</h2>
+    </div>
+    <div class="stats-grid" id="githubStatsGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPS ===== -->
+<section id="apps" style="display:none;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// published_apps</span>
+      <h2>Published Apps</h2>
+    </div>
+    <div class="apps-grid" id="appsGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// get_in_touch</span>
+      <h2>Let's Work Together</h2>
+      <p class="section-sub">Have a project in mind? I would love to hear from you. Drop a message or connect on socials!</p>
+    </div>
+    <div class="contact-wrapper">
+      <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Your Name</label>
+            <input type="text" id="fname" name="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="femail">Your Email</label>
+            <input type="email" id="femail" name="email" placeholder="john@example.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fsubject">Subject</label>
+          <input type="text" id="fsubject" name="subject" placeholder="Project Collaboration" required />
+        </div>
+        <div class="form-group">
+          <label for="fmessage">Message</label>
+          <textarea id="fmessage" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="submitBtn">Send Message</button>
+        <div class="form-success" id="formSuccess">Message sent! I will get back to you soon. ✨</div>
+      </form>
+      <div class="contact-info">
+        <div class="contact-card">
+          <h3>Connect with me</h3>
+          <div id="socialLinksContainer">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+        <div class="availability-card" id="availCard">
+          <div class="avail-dot"></div>
+          <div><strong>Currently Available</strong><p>Open to freelance projects, collaborations, and full-time opportunities.</p></div>
+        </div>
+        <div class="contact-info-card">
+          <div class="info-row" id="addressRow">
+            <span class="info-icon">📍</span>
+            <span id="addressText">India</span>
+          </div>
+          <div class="info-row" id="emailRow">
+            <span class="info-icon">✉️</span>
+            <a href="mailto:pareshchauhan39500@gmail.com" id="emailLink">pareshchauhan39500@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">&lt;PC/&gt;</div>
+      <p id="footerText">Built with ❤️ by <strong>Paresh Chauhan</strong> · Hosted on GitHub Pages</p>
+      <p class="footer-copy">© 2025 Paresh Chauhan. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== PREVIEW MODE BANNER ===== -->
+<div id="previewBanner" style="display:none; position:fixed; top:0; left:0; width:100%; background:linear-gradient(90deg, #FFD700, #FFAB00); color:#080600; font-weight:600; font-size:0.85rem; padding:0.4rem 1rem; z-index:10000; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.5);">
+  ⚡ PREVIEW MODE: Showing draft edits from Admin Panel.
+  <button onclick="clearPreview()" style="margin-left:0.75rem; background:#080600; color:#FFD700; border:none; border-radius:4px; padding:2px 10px; cursor:pointer; font-weight:600; font-size:0.75rem;">Reset to Live</button>
+  <a href="admin.html" style="margin-left:0.5rem; color:#080600; text-decoration:underline; font-weight:700;">Back to Admin Panel &rarr;</a>
+</div>
+
+<!-- ===== ADMIN CONFIG MODAL ===== -->
+<div id="adminModal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeAdminModal()" aria-label="Close">✕</button>
+    <h2 class="modal-title">⚙️ Admin Studio</h2>
+    
+    <!-- Prominent Full Admin Panel Link -->
+    <div style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,193,7,0.05)); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem; margin: 1rem 0 1.5rem; text-align: center;">
+      <h3 style="color: var(--gold-bright); font-size: 1.05rem; margin-bottom: 0.35rem;">✨ Full Visual Admin Panel</h3>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem;">Edit Bio, Skills, Experience, Education, Projects, App links and push changes directly to GitHub with your Access Token!</p>
+      <a href="admin.html" class="btn btn-primary btn-full" style="display:inline-flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none; font-weight:700;">🚀 Open Visual Admin Panel</a>
+    </div>
+
+    <hr class="modal-divider" />
+    <p class="modal-sub">Or quick-sync from GitHub using a Personal Access Token:</p>
+    <div class="form-group">
+      <label for="ghToken">GitHub Personal Access Token</label>
+      <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+    </div>
+    <div class="form-group">
+      <label for="ghRepo">Repository (owner/repo)</label>
+      <input type="text" id="ghRepo" placeholder="INAxDeveloper/portfolio" value="INAxDeveloper/portfolio" />
+    </div>
+    <div class="form-group">
+      <label for="ghBranch">Branch</label>
+      <input type="text" id="ghBranch" placeholder="main" value="main" />
+    </div>
+    <div class="form-group">
+      <label for="ghFile">File path in repo</label>
+      <input type="text" id="ghFile" placeholder="profile.json" value="profile.json" />
+    </div>
+    <button class="btn btn-secondary btn-full" onclick="loadFromGitHub()" id="loadGhBtn">Quick Fetch from GitHub</button>
+    <div id="adminStatus" class="admin-status"></div>
+  </div>
+</div>
+
+<button id="adminFab" onclick="openAdminModal()" title="Admin Panel" aria-label="Open Admin Panel">⚙️</button>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+{
+  "name": "Paresh Chauhan",
+  "tagline": "Android Developer",
+  "bio": "Passionate Android developer with hands-on experience building robust, user-friendly mobile applications using Kotlin and Java. Skilled in XML-based UI design, Firebase integration, REST APIs, and crafting smooth mobile experiences.",
+  "available": true,
+  "address": "India",
+  "email": "pareshchauhan39500@gmail.com",
+  "phone": "+91-XXXXXXXXXX",
+  "stats": { "projects": 15, "years": 3, "apps": 10 },
+  "skills": [
+    {
+      "category": "Android Development",
+      "items": [
+        { "name": "Kotlin", "level": 90 },
+        { "name": "Java", "level": 85 },
+        { "name": "XML Layouts", "level": 88 },
+        { "name": "Android SDK", "level": 82 },
+        { "name": "MVVM Architecture", "level": 80 }
+      ]
+    },
+    {
+      "category": "Libraries & Tools",
+      "items": [
+        { "name": "Retrofit / OkHttp", "level": 85 },
+        { "name": "Firebase", "level": 80 },
+        { "name": "Glide / Picasso", "level": 82 },
+        { "name": "Room DB", "level": 75 },
+        { "name": "Coroutines / Flow", "level": 78 }
+      ]
+    },
+    {
+      "category": "Backend & Web",
+      "items": [
+        { "name": "Node.js", "level": 70 },
+        { "name": "REST APIs", "level": 80 },
+        { "name": "HTML / CSS / JS", "level": 75 },
+        { "name": "MongoDB", "level": 65 }
+      ]
+    },
+    {
+      "category": "Tools & DevOps",
+      "items": [
+        { "name": "Git / GitHub", "level": 90 },
+        { "name": "Android Studio", "level": 92 },
+        { "name": "Postman", "level": 80 },
+        { "name": "Figma", "level": 65 }
+      ]
+    }
+  ],
+  "techPills": ["Kotlin", "Java", "Android SDK", "XML", "MVVM", "Firebase", "Retrofit", "Room DB", "Coroutines", "Node.js", "REST API", "Git", "Postman", "Figma", "Glide"],
+  "education": [
+    {
+      "year": "2019 - 2023",
+      "degree": "Bachelor of Computer Application (BCA)",
+      "institution": "Gujarat University",
+      "description": "Studied computer science fundamentals, data structures, algorithms, software engineering, and mobile application development.",
+      "tags": ["BCA", "Computer Science", "Gujarat"]
+    }
+  ],
+  "experience": [
+    {
+      "year": "Jan 2024 - May 2025",
+      "role": "Freelance Android Developer",
+      "company": "Self-Employed / Remote",
+      "description": "Developed and delivered multiple Android applications for clients using Kotlin and Java. Implemented MVVM architecture, Firebase integration, and REST API consumption. Managed projects independently from requirements gathering to Play Store deployment.",
+      "tags": ["Kotlin", "Firebase", "MVVM", "Retrofit"]
+    },
+    {
+      "year": "May 2022 - Dec 2023",
+      "role": "Android Developer",
+      "company": "AndroTech Solutions",
+      "description": "Built and maintained Android applications for enterprise clients. Worked on XML UI design, API integration with Retrofit, and local data storage with Room DB. Collaborated with cross-functional teams using Git workflows.",
+      "tags": ["Java", "Kotlin", "XML", "Room DB", "Retrofit"]
+    }
+  ],
+  "projects": [
+    {
+      "icon": "📱",
+      "name": "Smart Expense Tracker",
+      "description": "A feature-rich Android app to track daily expenses with category-wise charts, budget alerts, and cloud sync via Firebase. Built with Kotlin and MVVM pattern.",
+      "tech": ["Kotlin", "Firebase", "MVVM", "Room DB"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "",
+      "featured": true
+    },
+    {
+      "icon": "💬",
+      "name": "Real-Time Chat App",
+      "description": "Real-time messaging app with user authentication, push notifications, image sharing, and online status indicators powered by Firebase.",
+      "tech": ["Java", "Firebase", "XML", "Glide"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "",
+      "featured": false
+    },
+    {
+      "icon": "🛒",
+      "name": "E-Commerce Android App",
+      "description": "Full-featured shopping app with product listings, cart management, order tracking, and Razorpay payment gateway integration.",
+      "tech": ["Kotlin", "Retrofit", "MVVM", "Razorpay"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "",
+      "featured": false
+    },
+    {
+      "icon": "📰",
+      "name": "News Reader App",
+      "description": "Modern news reader app consuming REST API with category filtering, bookmarks, offline reading via Room DB, and Material Design UI.",
+      "tech": ["Kotlin", "Retrofit", "Room DB", "Coroutines"],
+      "github": "https://github.com/INAxDeveloper",
+      "live": "",
+      "featured": false
+    }
+  ],
+  "socialLinks": [
+    { "platform": "GitHub", "handle": "@INAxDeveloper", "url": "https://github.com/INAxDeveloper", "icon": "github" },
+    { "platform": "LinkedIn", "handle": "Paresh Chauhan", "url": "https://linkedin.com/in/paresh-chauhan", "icon": "linkedin" },
+    { "platform": "Email", "handle": "pareshchauhan39500@gmail.com", "url": "mailto:pareshchauhan39500@gmail.com", "icon": "email" }
+  ],
+  "appLinks": [
+    { "name": "Expense Tracker", "store": "Play Store", "url": "https://play.google.com/store" },
+    { "name": "Chat App", "store": "Play Store", "url": "https://play.google.com/store" }
+  ],
+  "githubUsername": "INAxDeveloper",
+  "footerText": "Built with love by Paresh Chauhan · Hosted on GitHub Pages"
+}
+

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paresh Chauhan | Visual Admin Studio</title>
+  <meta name="description" content="Visual Admin Panel for Paresh Chauhan's Portfolio - edit profile, skills, projects, and push directly to GitHub." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- ===== TOP HEADER ===== -->
+  <header class="admin-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <span class="brand-badge">&lt;PC/Admin&gt;</span>
+        <div class="brand-title">Paresh Chauhan <span>Studio</span></div>
+      </div>
+
+      <div class="header-actions">
+        <div class="status-pill" id="statusBar">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">Checking connection...</span>
+        </div>
+
+        <button type="button" class="btn btn-secondary btn-sm" onclick="previewPortfolio()" title="Test changes on local portfolio">
+          👁️ Preview Live
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="downloadJson()" title="Download profile.json backup">
+          ⬇️ Download JSON
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="openPushModal()" title="Commit & Push to GitHub">
+          🚀 Push to GitHub
+        </button>
+        <a href="index.html" class="btn btn-secondary btn-sm" title="Go to public portfolio page">
+          🏠 Portfolio
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTAINER ===== -->
+  <main class="admin-container">
+
+    <!-- ===== GITHUB CREDENTIALS & REPO BAR ===== -->
+    <section class="gh-card">
+      <div class="gh-header">
+        <div class="gh-title">
+          <span>🐙</span> GitHub Synchronization
+        </div>
+        <div class="account-presets">
+          <span class="preset-label">Account Presets:</span>
+          <button type="button" class="preset-btn active" data-preset="inax">INAxDeveloper</button>
+          <button type="button" class="preset-btn" data-preset="admin">inaxdevelopersAdmin</button>
+        </div>
+      </div>
+
+      <div class="gh-form-grid">
+        <div class="form-group">
+          <label for="ghToken">Personal Access Token (PAT)</label>
+          <div class="input-with-action">
+            <input type="password" id="ghToken" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+            <button type="button" class="input-action-btn" id="tokenToggleBtn" onclick="toggleTokenVisibility()" title="Show/Hide Token">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ghRepo">Repository (owner/repo)</label>
+          <input type="text" id="ghRepo" class="form-control" placeholder="INAxDeveloper/portfolio" value="INAxDeveloper/portfolio" />
+        </div>
+
+        <div class="form-group" style="max-width: 140px;">
+          <label for="ghBranch">Branch</label>
+          <input type="text" id="ghBranch" class="form-control" placeholder="main" value="main" />
+        </div>
+
+        <div class="form-group" style="max-width: 160px;">
+          <label for="ghFile">File Path</label>
+          <input type="text" id="ghFile" class="form-control" placeholder="profile.json" value="profile.json" />
+        </div>
+      </div>
+
+      <div class="gh-actions-bar">
+        <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+          <label style="font-size:0.82rem; color:var(--text-secondary); display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+            <input type="checkbox" id="rememberToken" checked style="accent-color:var(--gold-bright);" />
+            Remember token in this browser
+          </label>
+          <button type="button" class="token-help-toggle" onclick="toggleTokenHelp()">
+            ℹ️ How to create a GitHub Token
+          </button>
+        </div>
+
+        <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="loadFromGitHub()">
+            📥 Fetch from GitHub
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="loadLocalProfile()">
+            📂 Load Local profile.json
+          </button>
+        </div>
+      </div>
+
+      <!-- Expandable Token Guide -->
+      <div class="token-help-box" id="tokenHelpBox">
+        <strong>How to get a GitHub Personal Access Token (PAT):</strong>
+        <ol>
+          <li>Visit <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener">github.com/settings/tokens/new</a> (GitHub Developer Settings).</li>
+          <li>Give note name: <code>Portfolio-Admin-Panel</code> and choose Expiration (e.g. 90 days or No expiration).</li>
+          <li>Check the <strong><code>repo</code></strong> scope checkbox (Full control of private repositories & commit access).</li>
+          <li>Click <strong>Generate token</strong> at the bottom, then copy the token (starts with <code>ghp_</code>) and paste it into the input above.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== NAVIGATION TABS ===== -->
+    <div class="tabs-wrapper">
+      <nav class="tabs-nav">
+        <button type="button" class="tab-btn active" data-tab="profile">👤 Profile &amp; Bio</button>
+        <button type="button" class="tab-btn" data-tab="skills">⚡ Skills &amp; Stack</button>
+        <button type="button" class="tab-btn" data-tab="experience">💼 Work Experience</button>
+        <button type="button" class="tab-btn" data-tab="education">🎓 Education</button>
+        <button type="button" class="tab-btn" data-tab="projects">🚀 Projects</button>
+        <button type="button" class="tab-btn" data-tab="socials">🌐 Social Links</button>
+        <button type="button" class="tab-btn" data-tab="apps">📱 App Store Links</button>
+        <button type="button" class="tab-btn" data-tab="raw">📄 Raw JSON</button>
+      </nav>
+    </div>
+
+    <!-- ===== TAB 1: PROFILE & BIO ===== -->
+    <section class="tab-content active" id="tab-profile">
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>General Information</span>
+        </div>
+        <p class="form-card-sub">Your main personal details displayed in the hero and contact sections.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f_name">Full Name</label>
+            <input type="text" id="f_name" class="form-control" placeholder="Paresh Chauhan" onchange="markDirty()" />
+          </div>
+          <div class="form-group">
+            <label for="f_tagline">Tagline / Title</label>
+            <input type="text" id="f_tagline" class="form-control" placeholder="Android Developer" onchange="markDirty()" />
+          </div>
+          <div class="form-group">
+            <label for="f_githubUsername">GitHub Username (for stats &amp; widgets)</label>
+            <input type="text" id="f_githubUsername" class="form-control" placeholder="INAxDeveloper" onchange="markDirty()" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="f_bio">Bio &amp; Summary</label>
+          <textarea id="f_bio" class="form-control" rows="3" placeholder="Passionate Android developer crafting smooth mobile experiences with Kotlin and Java..." onchange="markDirty()"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f_email">Email Address</label>
+            <input type="email" id="f_email" class="form-control" placeholder="pareshchauhan39500@gmail.com" onchange="markDirty()" />
+          </div>
+          <div class="form-group">
+            <label for="f_phone">Phone Number (optional)</label>
+            <input type="text" id="f_phone" class="form-control" placeholder="+91-XXXXXXXXXX" onchange="markDirty()" />
+          </div>
+          <div class="form-group">
+            <label for="f_address">Location / Address</label>
+            <input type="text" id="f_address" class="form-control" placeholder="India" onchange="markDirty()" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="switch-group">
+            <div class="switch-label-group">
+              <strong>Availability Status</strong>
+              <span>Displays green &quot;Available for work&quot; pill in hero section</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="f_available" checked onchange="markDirty()" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Counters Card -->
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Hero Highlight Numbers</span>
+        </div>
+        <p class="form-card-sub">Key metrics shown as animated counters below the hero section.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f_stat_projects">Projects Completed</label>
+            <input type="number" id="f_stat_projects" class="form-control" value="15" min="0" onchange="markDirty()" />
+          </div>
+          <div class="form-group">
+            <label for="f_stat_years">Years Coding / Experience</label>
+            <input type="number" id="f_stat_years" class="form-control" value="3" min="0" onchange="markDirty()" />
+          </div>
+          <div class="form-group">
+            <label for="f_stat_apps">Apps Built / Shipped</label>
+            <input type="number" id="f_stat_apps" class="form-control" value="10" min="0" onchange="markDirty()" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Text Card -->
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Footer Text</span>
+        </div>
+        <p class="form-card-sub">Custom message displayed at the bottom of the portfolio page (HTML supported).</p>
+        <div class="form-group">
+          <input type="text" id="f_footerText" class="form-control" placeholder="Built with ❤️ by Paresh Chauhan · Hosted on GitHub Pages" onchange="markDirty()" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB 2: SKILLS & TECH ===== -->
+    <section class="tab-content" id="tab-skills">
+      <!-- Tech Pills -->
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Tech Stack Highlight Badges</span>
+        </div>
+        <p class="form-card-sub">Quick badges displayed below the skills grid (e.g. Kotlin, Java, MVVM, Room DB, Firebase).</p>
+        
+        <div class="pills-manager" id="techPillsContainer">
+          <!-- Rendered by JS -->
+        </div>
+
+        <div style="display:flex; gap:0.5rem; max-width:400px;">
+          <input type="text" id="newTechPillInput" class="form-control" placeholder="Add new technology (e.g. Jetpack Compose)" onkeydown="if(event.key==='Enter'){event.preventDefault(); addTechPill();}" />
+          <button type="button" class="btn btn-secondary btn-sm" onclick="addTechPill()">+ Add Tag</button>
+        </div>
+      </div>
+
+      <!-- Skill Categories -->
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Categorized Skill Bars</span>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addSkillCategory()">+ Add Category</button>
+        </div>
+        <p class="form-card-sub">Group your skills into categories with proficiency percentages (0-100%).</p>
+
+        <div id="skillsCategoriesContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB 3: EXPERIENCE ===== -->
+    <section class="tab-content" id="tab-experience">
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Professional Experience Timeline</span>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addExperience()">+ Add Experience</button>
+        </div>
+        <p class="form-card-sub">Past work history, roles, client projects, and freelance work.</p>
+
+        <div id="experienceContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB 4: EDUCATION ===== -->
+    <section class="tab-content" id="tab-education">
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Education Timeline</span>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addEducation()">+ Add Education</button>
+        </div>
+        <p class="form-card-sub">Degrees, colleges, universities, and diplomas.</p>
+
+        <div id="educationContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB 5: PROJECTS ===== -->
+    <section class="tab-content" id="tab-projects">
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Featured &amp; Published Projects</span>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addProject()">+ Add New Project</button>
+        </div>
+        <p class="form-card-sub">Showcase your mobile apps, repositories, and case studies.</p>
+
+        <div id="projectsContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB 6: SOCIAL LINKS ===== -->
+    <section class="tab-content" id="tab-socials">
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Social &amp; Contact Links</span>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addSocial()">+ Add Social Link</button>
+        </div>
+        <p class="form-card-sub">Links shown in the contact card (GitHub, LinkedIn, Email, etc.).</p>
+
+        <div id="socialsContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB 7: APP LINKS ===== -->
+    <section class="tab-content" id="tab-apps">
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Store App Downloads</span>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addApp()">+ Add App Link</button>
+        </div>
+        <p class="form-card-sub">Direct links to apps on Google Play Store, Apple App Store, or APK downloads.</p>
+
+        <div id="appsContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB 8: RAW JSON ===== -->
+    <section class="tab-content" id="tab-raw">
+      <div class="form-card">
+        <div class="form-card-title">
+          <span>Direct JSON Editor</span>
+          <div style="display:flex; gap:0.5rem;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="copyRawJson()">📋 Copy JSON</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="applyRawJson()">Apply to Form</button>
+          </div>
+        </div>
+        <p class="form-card-sub">You can copy or paste formatted <code>profile.json</code> data here.</p>
+
+        <textarea id="rawJsonEditor" class="json-editor" spellcheck="false"></textarea>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== PUSH CONFIRMATION MODAL ===== -->
+  <div class="modal-overlay" id="pushModal">
+    <div class="modal-box">
+      <button type="button" class="modal-close" onclick="closePushModal()">✕</button>
+      <div class="modal-title">🚀 Push to GitHub</div>
+      <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.25rem;">
+        This will commit and update <strong style="color:var(--gold-bright);" id="pushConfirmFile">profile.json</strong> directly to the repository:
+      </p>
+
+      <div style="background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1rem; margin-bottom:1.25rem; font-family:var(--font-mono); font-size:0.85rem;">
+        <div>Repository: <strong style="color:var(--gold-bright);" id="pushConfirmRepo">INAxDeveloper/portfolio</strong></div>
+        <div>Branch: <strong style="color:var(--gold-bright);" id="pushConfirmBranch">main</strong></div>
+      </div>
+
+      <div class="form-group">
+        <label for="commitMsgInput">Commit Message</label>
+        <input type="text" id="commitMsgInput" class="form-control" value="Update profile.json via Visual Admin Studio" />
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem;">
+        <button type="button" class="btn btn-secondary" onclick="closePushModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="confirmPushBtn" onclick="executePushToGitHub()">
+          Confirm &amp; Push to GitHub 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== LOADING OVERLAY ===== -->
+  <div id="loadingOverlay" style="display:none; position:fixed; inset:0; background:rgba(8,6,0,0.85); backdrop-filter:blur(6px); z-index:9999; align-items:center; justify-content:center; flex-direction:column; gap:1rem;">
+    <div style="font-size:2.5rem; animation:spin 1s linear infinite;">⚙️</div>
+    <div id="loadingText" style="color:var(--gold-bright); font-family:var(--font-mono); font-size:1rem;">Loading...</div>
+  </div>
+
+  <style>
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="admin-footer">
+    Paresh Chauhan Portfolio Studio · Seamless GitHub Integration · <a href="index.html">View Live Portfolio &rarr;</a>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+</html>
